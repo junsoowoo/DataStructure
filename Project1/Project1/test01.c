@@ -21,7 +21,6 @@ int main()
 		printf("\n");
 	}
 	printf("=====================================\n");
-
 	//돌 놓는 사이클
 	while (1)
 	{
@@ -35,7 +34,7 @@ int main()
 void put_black()
 {
 	int x, y;
-	printf("검정돌이 놓일 좌표를 입력하세요\n");
+	printf("검정돌이 놓일 좌표를 입력하세요.(0~18)\n");
 	scanf("%d%d", &x, &y);
 	if (board[x][y] != '+')
 	{
@@ -51,13 +50,14 @@ void put_black()
 		board[x][y] = 'B';
 	draw_board();
 	printf("검정돌 개수: %d\n", ++black_cnt);
+	printf("흰돌 개수: %d\n", white_cnt);
 }
 
 // 흰돌 놓기
 void put_white()
 {
 	int x, y;
-	printf("흰돌이 놓일 좌표를 입력하세요\n");
+	printf("흰돌이 놓일 좌표를 입력하세요.(0~18)\n");
 	scanf("%d%d", &x, &y);
 	if (board[x][y] != '+')
 	{
@@ -72,6 +72,7 @@ void put_white()
 	else
 		board[x][y] = 'W';
 	draw_board();
+	printf("검정돌 개수: %d\n", black_cnt);
 	printf("흰돌 개수: %d\n", ++white_cnt);
 }
 
@@ -86,5 +87,4 @@ void draw_board()
 		}
 		printf("\n");
 	}
-
 }
