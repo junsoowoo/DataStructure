@@ -11,13 +11,13 @@ typedef struct {
 
 } Dict;
 //함수 선언
-void Search(Dict list[], int size ,char Searchname);
+void Search(Dict list[], int size ,char Searchname[]);
 void Insert(Dict list[], int size);
-void Delete(char name);
-void DeleteAll(char postion);
-void PrintAll();
-void FindMaxHP();
-void SortHP(int a);
+int Delete(Dict list[], int size, char Deletename[]);
+int DeleteAll(Dict list[], int size, char Deleteposition[]);
+void PrintAll(Dict list[], int size);
+void FindMaxHP(Dict list[],int size);
+void SortHP(Dict list[], int size);
 //사전 배열 선언
 
 //메인
@@ -70,24 +70,30 @@ int main()
 
 		else if (order == 3)
 		{
-
+			char Deletename[30];
+			printf("삭제할 캐릭터의 이름을 입력: \n");
+			scanf("%s", Deletename);
+			Delete(list, size, Deletename);
 		}
 
 		else if (order == 4)
 		{
-
+			char Deletepostion[30];
+			printf("삭제할 포지션의 이름을 입력: \n");
+			scanf("%s", Deletepostion);
+			DeleteAll(list, size, Deletepostion);
 		}
 		else if (order == 5)
 		{
-
+			PrintAll(list, size);
 		}
 		else if (order == 6)
 		{
-
+			FindMaxHP(list,size);
 		}
 		else if (order == 7)
 		{
-
+			SortHP(list, size);
 		}
 	}
 	return 0;
@@ -130,29 +136,132 @@ void Insert(Dict list[], int size)
 	size++;
 }
 //챔피언 삭제 함수
-void Delete(char name)
+int Delete(Dict list[], int size, char Deletename[])
 {
+	int found = 0;
+	for (int i = 0; i < size; i++) 
+	{
+		if (strcmp(list[i].name, Deletename) == 0) 
+		{
+			for (int j = i; j < size - 1; j++) 
+			{
+				list[j] = list[j + 1];
+			}
+			found = 1;
+			break;
+		}
+	}
+	if (found) {
+		printf("%s 챔피언이 삭제되었습니다.\n", Deletename);
+		return 1;
+	}
+	else {
+		printf("%s 챔피언을 찾을 수 없습니다.\n", Deletename);
+		return 0;
+	}
+	size--;
 
 }
 //포지션 삭제 함수
-void DeleteAll(char postion)
+int DeleteAll(Dict list[], int size, char Deleteposition[])
 {
+	int found = 0;
+	for (int i = 0; i < size; i++) 
+	{
+		if (strcmp(list[i].position, Deleteposition) == 0) {
+			for (int j = i; j < size - 1; j++) {
+				list[j] = list[j + 1];
+			}
+			found = 1;
+			break;
+		}
+	}
+
+	if (found) {
+		printf("%s 챔피언이 삭제되었습니다.\n", Deleteposition);
+		return 1;
+	}
+	else {
+		printf("%s 챔피언을 찾을 수 없습니다.\n", Deleteposition);
+		return 0;
+	}
+	
 
 }
-//모든 챔피언의 정보 출력 함수
-void PrintAll()
-{
 
+//모든 챔피언의 정보 출력 함수
+void PrintAll(Dict list[], int size)
+{
+	printf("모든 챔피언 정보:\n");
+	for (int i = 0; i < size; i++) 
+	{
+		printf("챔피언 이름: %s\n", list[i].name);
+		printf("체력: %d\n", list[i].hp);
+		printf("마나: %d\n", list[i].mp);
+		printf("속도: %d\n", list[i].speed);
+		printf("사거리: %d\n", list[i].range);
+		printf("포지션: %s\n", list[i].position);
+		printf("\n");
+	}
 }
 //가장 체력이 큰 챔피언의 정보 출력 함수
-void FindMaxHP()
+void FindMaxHP(Dict list[], int size)
 {
-	int MaxHP = 0;
-
+	int maxHP = 0;
+	int maxHParray[MAX_CHAMPIONS];
+	int count = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (list[i].hp > maxHP)
+		{
+			maxHP = list[i].hp;
+		}
+	}
+	for (int i = 0; i < size; i++)
+	{
+		if (list[i].hp == maxHP)
+		{
+			maxHParray[count] = i;
+			count++;
+		}
+	}
+	for (int i = 0; i < count; i++) 
+	{
+		printf("가장 체력이 큰 챔피언 정보:\n");
+		printf("이름: %s\n", list[maxHParray[i]].name);
+		printf("체력: %d\n", list[maxHParray[i]].hp);
+		printf("마나: %d\n", list[maxHParray[i]].mp);
+		printf("속도: %d\n", list[maxHParray[i]].speed);
+		printf("사거리: %d\n", list[maxHParray[i]].range);
+		printf("포지션: %s\n", list[maxHParray[i]].position);
+	}
 }
 //체력이 큰 챔피언부터 순서대로 저장
-void SortHP(int a)
+void SortHP(Dict list[],int size)
 {
-
-
+	Dict temp;
+	for (int i = 0; i < size - 1; i++) 
+	{
+		for (int j = 0; j < size - i - 1; j++) 
+		{
+			if (list[j].hp < list[j + 1].hp) 
+			{
+				// 현재 챔피언의 체력이 다음 챔피언의 체력보다 작으면 위치를 교환합니다.
+				temp = list[j];
+				list[j] = list[j + 1];
+				list[j + 1] = temp;
+			}
+		}
+	}
+	printf("체력 순으로 정렬된 챔피언 정보:\n");
+	for (int i = 0; i < size; i++) 
+	{
+		printf("챔피언 이름: %s\n", list[i].name);
+		printf("체력: %d\n", list[i].hp);
+		printf("마나: %d\n", list[i].mp);
+		printf("속도: %d\n", list[i].speed);
+		printf("사거리: %d\n", list[i].range);
+		printf("포지션: %s\n", list[i].position);
+		printf("\n");
+	}
 }
