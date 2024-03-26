@@ -1,6 +1,6 @@
-Jayce		3466		8307		452		73		mid
-Vayne		3318		2790		390		60		support
-Lee Sin		9864		6257		747		19		support
+"Jayce", 3466, 8307,452 ,73 ,"mid"
+"Vayne" ,3318, 2790, 390, 60, "support"
+"Lee Sin", 9864		6257		747		19		support
 Teemo		1915		1313		700		68		mid
 Nami		2968		2153		803		74		support
 Jinx		2583		3042		123		53		jungle
