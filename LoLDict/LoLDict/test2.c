@@ -18,11 +18,11 @@ int DeleteAll(Dict list[], int size, char Deleteposition[]);
 void PrintAll(Dict list[], int size);
 void FindMaxHP(Dict list[],int size);
 void SortHP(Dict list[], int size);
-//사전 배열 선언
 
 //메인
 int main()
 {
+	//사전 배열 선언
 	Dict list[256] = {
 		{"Jayce", 3466, 8307, 452, 73, "mid"},
 		{"Vayne", 3318, 2790, 390, 60, "support"},
@@ -50,7 +50,6 @@ int main()
 	int size = 20;
 	int order;
 	while (1)
-	
 	{
 		printf("명령어를 입력하세요.\n(1.Search, 2.Insert, 3.Delete, 4.DeleteAll, 5.PrintAll, 6.FindMaxHP, 7.SortHP)\n");
 		scanf("%d", &order);
@@ -74,6 +73,8 @@ int main()
 			printf("삭제할 캐릭터의 이름을 입력: \n");
 			scanf("%s", Deletename);
 			Delete(list, size, Deletename);
+			size--;
+
 		}
 
 		else if (order == 4)
@@ -82,6 +83,8 @@ int main()
 			printf("삭제할 포지션의 이름을 입력: \n");
 			scanf("%s", Deletepostion);
 			DeleteAll(list, size, Deletepostion);
+			size--;
+
 		}
 		else if (order == 5)
 		{
@@ -102,7 +105,7 @@ int main()
 //챔피언 찾기 함수
 void Search(Dict list[], int size, char Searchname[])
 {
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i <= size; i++)
 	{
 		if (strcmp(list[i].name, Searchname) == 0)
 		{
@@ -151,15 +154,16 @@ int Delete(Dict list[], int size, char Deletename[])
 			break;
 		}
 	}
-	if (found) {
+	if (found) 
+	{
 		printf("%s 챔피언이 삭제되었습니다.\n", Deletename);
 		return 1;
 	}
-	else {
+	else 
+	{
 		printf("%s 챔피언을 찾을 수 없습니다.\n", Deletename);
 		return 0;
 	}
-	size--;
 
 }
 //포지션 삭제 함수
@@ -177,18 +181,19 @@ int DeleteAll(Dict list[], int size, char Deleteposition[])
 		}
 	}
 
-	if (found) {
+	if (found) 
+	{
 		printf("%s 챔피언이 삭제되었습니다.\n", Deleteposition);
 		return 1;
 	}
-	else {
+	else 
+	{
 		printf("%s 챔피언을 찾을 수 없습니다.\n", Deleteposition);
 		return 0;
 	}
 	
 
 }
-
 //모든 챔피언의 정보 출력 함수
 void PrintAll(Dict list[], int size)
 {
@@ -208,7 +213,6 @@ void PrintAll(Dict list[], int size)
 void FindMaxHP(Dict list[], int size)
 {
 	int maxHP = 0;
-	int maxHParray[MAX_CHAMPIONS];
 	int count = 0;
 	for (int i = 0; i < size; i++)
 	{
@@ -217,23 +221,24 @@ void FindMaxHP(Dict list[], int size)
 			maxHP = list[i].hp;
 		}
 	}
+	int maxarr[MAX_CHAMPIONS];
 	for (int i = 0; i < size; i++)
 	{
 		if (list[i].hp == maxHP)
 		{
-			maxHParray[count] = i;
+			maxarr[count] = i;
 			count++;
 		}
 	}
 	for (int i = 0; i < count; i++) 
 	{
 		printf("가장 체력이 큰 챔피언 정보:\n");
-		printf("이름: %s\n", list[maxHParray[i]].name);
-		printf("체력: %d\n", list[maxHParray[i]].hp);
-		printf("마나: %d\n", list[maxHParray[i]].mp);
-		printf("속도: %d\n", list[maxHParray[i]].speed);
-		printf("사거리: %d\n", list[maxHParray[i]].range);
-		printf("포지션: %s\n", list[maxHParray[i]].position);
+		printf("이름: %s\n", list[maxarr[i]].name);
+		printf("체력: %d\n", list[maxarr[i]].hp);
+		printf("마나: %d\n", list[maxarr[i]].mp);
+		printf("속도: %d\n", list[maxarr[i]].speed);
+		printf("사거리: %d\n", list[maxarr[i]].range);
+		printf("포지션: %s\n", list[maxarr[i]].position);
 	}
 }
 //체력이 큰 챔피언부터 순서대로 저장
@@ -246,7 +251,7 @@ void SortHP(Dict list[],int size)
 		{
 			if (list[j].hp < list[j + 1].hp) 
 			{
-				// 현재 챔피언의 체력이 다음 챔피언의 체력보다 작으면 위치를 교환합니다.
+				//버블정렬
 				temp = list[j];
 				list[j] = list[j + 1];
 				list[j + 1] = temp;
