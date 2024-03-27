@@ -14,7 +14,7 @@ typedef struct {
 void Search(Dict list[], int size ,char Searchname[]);
 void Insert(Dict list[], int size);
 int Delete(Dict list[], int size, char Deletename[]);
-int DeleteAll(Dict list[], int size, char Deleteposition[]);
+void DeleteAll(Dict list[], int size, char Deleteposition[]);
 void PrintAll(Dict list[], int size);
 void FindMaxHP(Dict list[],int size);
 void SortHP(Dict list[], int size);
@@ -26,6 +26,7 @@ int main()
 	Dict list[256] = {
 		{"Jayce", 3466, 8307, 452, 73, "mid"},
 		{"Vayne", 3318, 2790, 390, 60, "support"},
+		{"LeeSin",9864,6527,747,19,"support"},
 		{"Teemo",1915, 1313, 700, 68, "mid"},
 		{"Nami", 2968, 2153, 803, 74, "support"},
 		{"Jinx", 2583, 3042, 123, 53, "jungle"},
@@ -45,9 +46,8 @@ int main()
 		{"Shen",4794, 9220,783,42,"mid"},
 		{"Fizz",9864, 1913,433,38,"bottom"},
 		{"Taric",6158, 7451,160,36,"bottom"}
-
 	};
-	int size = 20;
+	int size = 22;
 	int order;
 	while (1)
 	{
@@ -83,7 +83,6 @@ int main()
 			printf("삭제할 포지션의 이름을 입력: \n");
 			scanf("%s", Deletepostion);
 			DeleteAll(list, size, Deletepostion);
-			size--;
 
 		}
 		else if (order == 5)
@@ -164,20 +163,21 @@ int Delete(Dict list[], int size, char Deletename[])
 		printf("%s 챔피언을 찾을 수 없습니다.\n", Deletename);
 		return 0;
 	}
-
 }
 //포지션 삭제 함수
-int DeleteAll(Dict list[], int size, char Deleteposition[])
+void DeleteAll(Dict list[], int size, char Deleteposition[])
 {
 	int found = 0;
 	for (int i = 0; i < size; i++) 
 	{
-		if (strcmp(list[i].position, Deleteposition) == 0) {
-			for (int j = i; j < size - 1; j++) {
+		if (strcmp(list[i].position, Deleteposition) == 0) 
+		{
+			for (int j = i; j < size - 1; j++) 
+			{
 				list[j] = list[j + 1];
 			}
+			size--;
 			found = 1;
-			break;
 		}
 	}
 
@@ -191,8 +191,6 @@ int DeleteAll(Dict list[], int size, char Deleteposition[])
 		printf("%s 챔피언을 찾을 수 없습니다.\n", Deleteposition);
 		return 0;
 	}
-	
-
 }
 //모든 챔피언의 정보 출력 함수
 void PrintAll(Dict list[], int size)
@@ -261,12 +259,12 @@ void SortHP(Dict list[],int size)
 	printf("체력 순으로 정렬된 챔피언 정보:\n");
 	for (int i = 0; i < size; i++) 
 	{
-		printf("챔피언 이름: %s\n", list[i].name);
-		printf("체력: %d\n", list[i].hp);
-		printf("마나: %d\n", list[i].mp);
-		printf("속도: %d\n", list[i].speed);
-		printf("사거리: %d\n", list[i].range);
-		printf("포지션: %s\n", list[i].position);
+		printf("%s의 정보\n", list[i].name);
+		printf("HP: %d\n", list[i].hp);
+		printf("MP: %d\n", list[i].mp);
+		printf("SPEED: %d\n", list[i].speed);
+		printf("RANGE: %d\n", list[i].range);
+		printf("POSITION: %s\n", list[i].position);
 		printf("\n");
 	}
 }
