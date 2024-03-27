@@ -10,7 +10,7 @@ typedef struct {
 }Dict;
 
 void Search(Dict list[], int size, char searchname[]);
-void Insert(Dict list[], int size);
+int Insert(Dict list[], int size);
 int Delete(Dict list[], int size, char deletename[]);
 int DeleteAll(Dict list[], int size, char deleteposition[]);
 void PrintAll(Dict list[], int size);
@@ -19,8 +19,6 @@ void SortByHP(Dict list[], int size);
 
 int main()
 {
-	int order;
-	int size=22;
 	Dict list[MAXDICT] = {
 		{"Jayce", 3466, 8307, 452, 73, "mid"},
 		{"Vayne", 3318, 2790, 390, 60, "support"},
@@ -45,7 +43,8 @@ int main()
 		{"Fizz",9864, 1913,433,38,"bottom"},
 		{"Taric",6158, 7451,160,36,"bottom"}
 	};
-	
+	int size=22;
+	int order;
 	while (1)
 	{
 		printf("시작할 프로그램을 입력\n1.Search 2.Insert 3.Delete 4.DeleteAll 5.PrintAll 6.FindMaxHP 7.SortByHP\n");
@@ -60,17 +59,15 @@ int main()
 		}
 		else if (order == 2)
 		{
-			Insert(list, size);
+			size=Insert(list, size);
 		}
 		else if (order == 3)
 		{
 			char deletename[30];
 			printf("삭제할 챔피언의 이름 입력: \n");
 			scanf("%s", deletename);
-			if (Delete(list, size, deletename))
-			{
-				size--;
-			}
+			size=Delete(list, size, deletename);
+			
 		}
 		else if (order == 4)
 		{
@@ -97,7 +94,7 @@ int main()
 
 void Search(Dict list[], int size, char searchname[])
 {
-	for (int i = 0; i <= size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		if (strcmp(list[i].name , searchname) == 0)
 		{
@@ -112,7 +109,7 @@ void Search(Dict list[], int size, char searchname[])
 	}
 	printf("입력한 이름의 챔피언이 없습니다.\n");
 }
-void Insert(Dict list[], int size)
+int Insert(Dict list[], int size)
 {
 	printf("새로운 챔피언의 정보 입력:\n");
 	printf("이름: ");
@@ -127,6 +124,7 @@ void Insert(Dict list[], int size)
 	scanf("%d", &list[size].range);
 	printf("POSITION: ");
 	scanf("%s", list[size].position);
+	return size + 1;
 }
 int Delete(Dict list[], int size, char deletename[])
 {
@@ -146,12 +144,12 @@ int Delete(Dict list[], int size, char deletename[])
 	if (found)
 	{
 		printf("%s 챔피언이 삭제되었습니다.\n", deletename);
-		return 1;
+		return size-1;
 	}
 	else
 	{
 		printf("입력한 이름의 챔피언이 없습니다.\n");
-		return 0;
+		return size;
 	}
 }
 int DeleteAll(Dict list[], int size, char deleteposition[])
@@ -162,11 +160,11 @@ int DeleteAll(Dict list[], int size, char deleteposition[])
 	{
 		if (strcmp(list[i].position, deleteposition) == 0)
 		{
-			found = 1;
 			for (int j = i; j < newsize - 1; j++)
 			{
 				list[j] = list[j + 1];
 			}
+			found = 1;
 			newsize--;
 			i--;
 		}
@@ -243,14 +241,5 @@ void SortByHP(Dict list[], int size)
 		}
 	}
 	printf("체력순으로 정렬\n");
-	for (int i = 0; i < size; i++)
-	{
-		printf("%s의 정보\n", list[i].name);
-		printf("HP: %d\n", list[i].hp);
-		printf("MP: %d\n", list[i].mp);
-		printf("SPEED: %d\n", list[i].speed);
-		printf("RANGE: %d\n", list[i].range);
-		printf("POSITION: %s\n", list[i].position);
-		printf("\n");
-	}
+	PrintAll(list, size);
 }
