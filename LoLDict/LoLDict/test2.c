@@ -171,12 +171,12 @@ int DeleteAll(Dict list[], int size, char deleteposition[])
 	}
 	if (found)
 	{
-		printf("%s 챔피언이 삭제되었습니다.\n", deleteposition);
+		printf("%s 포지션이 삭제되었습니다.\n", deleteposition);
 		return newsize;
 	}
 	else
 	{
-		printf("%s 챔피언을 찾을 수 없습니다.\n", deleteposition);
+		printf("%s 포지션을 찾을 수 없습니다.\n", deleteposition);
 		return size;
 	}
 
@@ -225,8 +225,9 @@ void FindMaxHP(Dict list[], int size)
 		printf("\n");
 	}
 }
-void SortByHP(Dict list[], int size)
+void SortByHP(Dict list[], int size)	
 {
+	//버블정렬
 	Dict temp;
 	for (int i = 0; i < size - 1; i++)
 	{

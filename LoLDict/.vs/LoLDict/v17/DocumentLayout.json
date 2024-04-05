@@ -3,6 +3,9 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\\uBBF8\uB9AC\uBCF4\uAE30\\2022122041\uD55C\uC900\uC218\uC790\uB8CC\uAD6C\uC8704\uC8FC\uCC28.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|solutionrelative:LoLDict\\test2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -19,12 +22,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "2022122041\uD55C\uC900\uC218\uC790\uB8CC\uAD6C\uC8704\uC8FC\uCC28.c",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\\uBBF8\uB9AC\uBCF4\uAE30\\2022122041\uD55C\uC900\uC218\uC790\uB8CC\uAD6C\uC8704\uC8FC\uCC28.c",
+              "RelativeDocumentMoniker": "..\\..\\\uBBF8\uB9AC\uBCF4\uAE30\\2022122041\uD55C\uC900\uC218\uC790\uB8CC\uAD6C\uC8704\uC8FC\uCC28.c",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\\uBBF8\uB9AC\uBCF4\uAE30\\2022122041\uD55C\uC900\uC218\uC790\uB8CC\uAD6C\uC8704\uC8FC\uCC28.c",
+              "RelativeToolTip": "..\\..\\\uBBF8\uB9AC\uBCF4\uAE30\\2022122041\uD55C\uC900\uC218\uC790\uB8CC\uAD6C\uC8704\uC8FC\uCC28.c",
+              "ViewState": "AQIAAH4AAAAAAAAAAAAAACwAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-04-03T03:48:55.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "test2.c",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test2.c",
               "RelativeDocumentMoniker": "LoLDict\\test2.c",
               "ToolTip": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test2.c",
               "RelativeToolTip": "LoLDict\\test2.c",
-              "ViewState": "AQIAANEAAAAAAAAAAAAowOMAAAAkAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAJ4AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-03-22T06:42:51.057Z",
               "EditorCaption": ""
