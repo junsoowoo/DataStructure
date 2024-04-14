@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|solutionrelative:LoLDict\\test2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test5.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|solutionrelative:LoLDict\\test5.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -23,25 +19,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "test2.c",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test2.c",
-              "RelativeDocumentMoniker": "LoLDict\\test2.c",
-              "ToolTip": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test2.c",
-              "RelativeToolTip": "LoLDict\\test2.c",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-04-05T06:38:56.769Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "test5.c",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test5.c",
               "RelativeDocumentMoniker": "LoLDict\\test5.c",
               "ToolTip": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test5.c",
               "RelativeToolTip": "LoLDict\\test5.c",
-              "ViewState": "AQIAAFsAAAAAAAAAAAAAAGwAAAAfAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-04-05T06:35:32.898Z",
               "EditorCaption": ""

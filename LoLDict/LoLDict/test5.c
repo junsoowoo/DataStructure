@@ -9,13 +9,13 @@ typedef struct {
 	char position[10];
 }Dict;
 
-void Search(Dict list[], int size, char searchname[]);
-int Insert(Dict list[], int size);
-int Delete(Dict list[], int size, char deletename[]);
-int DeleteAll(Dict list[], int size, char deleteposition[]);
-void PrintAll(Dict list[], int size);
-void FindMaxHP(Dict list[], int size);
-void SortByHP(Dict list[], int size);
+void Search_R(int index, Dict list[], int size, char searchname[]);
+void Insert_R(int index, Dict list[], int size);
+void Delete_R(int index, Dict list[], int size, char deletename[]);
+void DeleteAll_R(int index, Dict list[], int size, char deleteposition[]);
+void PrintAll_R(int index, Dict list[], int size);
+void FindMaxHP_R(int index, Dict list[], int size);
+void SortByHP_R(int index, Dict list[], int size);
 
 int main()
 {
@@ -55,18 +55,18 @@ int main()
 			char searchname[30];
 			printf("찾을 챔피언의 이름 입력: \n");
 			scanf("%s", searchname);
-			Search(list, size, searchname);
+			Search_R(0, list, size, searchname);
 		}
 		else if (order == 2)
 		{
-			size = Insert(list, size);
+			Insert_R(0, list, size);
 		}
 		else if (order == 3)
 		{
 			char deletename[30];
 			printf("삭제할 챔피언의 이름 입력: \n");
 			scanf("%s", deletename);
-			size = Delete(list, size, deletename);
+			Delete_R(0, list, size, deletename);
 
 		}
 		else if (order == 4)
@@ -74,173 +74,147 @@ int main()
 			char deleteposition[30];
 			printf("삭제할 포지션의 이름 입력: \n");
 			scanf("%s", deleteposition);
-			size = DeleteAll(list, size, deleteposition);
+			DeleteAll_R(0, list, size, deleteposition);
 
 		}
 		else if (order == 5)
 		{
-			PrintAll(list, size);
+			PrintAll_R(0, list, size);
 		}
 		else if (order == 6)
 		{
-			FindMaxHP(list, size);
+			FindMaxHP_R(0, list, size);
 		}
 		else if (order == 7)
 		{
-			SortByHP(list, size);
+			SortByHP_R(0, list, size);
 		}
 	}
 }
 
-void Search(int index, Dict list[], int size, char searchname[])
+void Search_R(int index, Dict list[], int size, char searchname[])
 {
 	if (index > size)
-		return;
-	if (strcmp(list[i].name, searchname) == 0)
-		{
-			printf("%s의 정보\n", list[i].name);
-			printf("HP: %d\n", list[i].hp);
-			printf("MP: %d\n", list[i].mp);
-			printf("SPEED: %d\n", list[i].speed);
-			printf("RANGE: %d\n", list[i].range);
-			printf("POSITION: %s\n", list[i].position);
-			return;
-		}
-	Search(index + 1, list, size);
-	printf("입력한 이름의 챔피언이 없습니다.\n");
-}
-int Insert(Dict list[], int size)
-{
-	printf("새로운 챔피언의 정보 입력:\n");
-	printf("이름: ");
-	scanf("%s", list[size].name);
-	printf("HP: ");
-	scanf("%d", &list[size].hp);
-	printf("MP: ");
-	scanf("%d", &list[size].mp);
-	printf("SPEED: ");
-	scanf("%d", &list[size].speed);
-	printf("RANGE: ");
-	scanf("%d", &list[size].range);
-	printf("POSITION: ");
-	scanf("%s", list[size].position);
-	return size + 1;
-}
-int Delete(Dict list[], int size, char deletename[])
-{
-	int found = 0;
-	for (int i = 0; i < size; i++)
-	{
-		if (strcmp(list[i].name, deletename) == 0)
-		{
-			for (int j = i; j < size - 1; j++)
-			{
-				list[j] = list[j + 1];
-			}
-			found = 1;
-			break;
-		}
-	}
-	if (found)
-	{
-		printf("%s 챔피언이 삭제되었습니다.\n", deletename);
-		return size - 1;
-	}
-	else
 	{
 		printf("입력한 이름의 챔피언이 없습니다.\n");
-		return size;
+		return;
 	}
-}
-int DeleteAll(Dict list[], int size, char deleteposition[])
-{
-	int found = 0;
-	int newsize = size;
-	for (int i = 0; i < newsize; i++)
+	if (strcmp(list[index].name, searchname) == 0)
 	{
-		if (strcmp(list[i].position, deleteposition) == 0)
-		{
-			for (int j = i; j < newsize - 1; j++)
-			{
-				list[j] = list[j + 1];
-			}
-			found = 1;
-			newsize--;
-			i--;
-		}
-	}
-	if (found)
-	{
-		printf("%s 포지션이 삭제되었습니다.\n", deleteposition);
-		return newsize;
-	}
-	else
-	{
-		printf("%s 포지션을 찾을 수 없습니다.\n", deleteposition);
-		return size;
+		printf("%s의 정보\n", list[index].name);
+		printf("HP: %d\n", list[index].hp);
+		printf("MP: %d\n", list[index].mp);
+		printf("SPEED: %d\n", list[index].speed);
+		printf("RANGE: %d\n", list[index].range);
+		printf("POSITION: %s\n", list[index].position);
+		return;
 	}
 
+	else Search_R(index + 1, list, size, searchname);
 }
-void PrintAll(Dict list[], int size)
+void Insert_R(int index, Dict list[], int size)
 {
-	for (int i = 0; i < size; i++)
+	if (index == size)
 	{
-		printf("%s의 정보\n", list[i].name);
-		printf("HP: %d\n", list[i].hp);
-		printf("MP: %d\n", list[i].mp);
-		printf("SPEED: %d\n", list[i].speed);
-		printf("RANGE: %d\n", list[i].range);
-		printf("POSITION: %s\n", list[i].position);
+		printf("새로운 챔피언의 정보 입력:\n");
+		printf("이름: ");
+		scanf("%s", list[size].name);
+		printf("HP: ");
+		scanf("%d", &list[size].hp);
+		printf("MP: ");
+		scanf("%d", &list[size].mp);
+		printf("SPEED: ");
+		scanf("%d", &list[size].speed);
+		printf("RANGE: ");
+		scanf("%d", &list[size].range);
+		printf("POSITION: ");
+		scanf("%s", list[size].position);
+	}
+}
+void Delete_R(int index, Dict list[], int size, char deletename[])
+{
+	if (index >= size) return;
+	if (strcmp(list[index].name, deletename) == 0)
+	{
+		//그냥 삭제한다는 플래그를 만듬. 이 자리의 값에 대해 직접적으로 묻지 않도록 작성 예정.
+		printf("%s 챔피언이 삭제되었습니다.\n", deletename);
+		list[index].name[0] = '\0';
+		Delete_R(index + 1, list, size, deletename);
+		return;
+	}
+	Delete_R(index + 1, list, size, deletename);
+}
+void DeleteAll_R(int index, Dict list[], int size, char deleteposition[])
+{
+	if (index >= size)
+		return printf("%s 포지션이 삭제되었습니다.\n", deleteposition);
+	if (strcmp(list[index].position, deleteposition) == 0)
+	{
+		//그냥 삭제한다는 플래그를 만듬. 이 자리의 값에 대해 직접적으로 묻지 않도록 작성 예정.
+		list[index].name[0] = '\0';
+		DeleteAll_R(index + 1, list, size, deleteposition);
+		return;
+	}
+	DeleteAll_R(index + 1, list, size, deleteposition);
+}
+void PrintAll_R(int index, Dict list[], int size)
+{
+	if (index >= size) return;
+	if (list[index].name[0] != '\0')
+	{
+		printf("%s의 정보\n", list[index].name);
+		printf("HP: %d\n", list[index].hp);
+		printf("MP: %d\n", list[index].mp);
+		printf("SPEED: %d\n", list[index].speed);
+		printf("RANGE: %d\n", list[index].range);
+		printf("POSITION: %s\n", list[index].position);
 		printf("\n");
 	}
+	PrintAll_R(index + 1, list, size);
 }
-void FindMaxHP(Dict list[], int size)
+void FindMaxHP_R(int index, Dict list[], int size)
 {
-	int maxHP = 0;
-	for (int i = 0; i < size; i++)
+	static int maxHP = 0; 
+	static int maxarr[MAXDICT]; 
+	static int count = 0;
+	if (index >= size)
 	{
-		if (list[i].hp > maxHP)
+		// 최대 체력을 가진 챔피언들의 정보 출력
+		for (int i = 0; i < count; i++)
 		{
-			maxHP = list[i].hp;
+			printf("%s의 정보\n", list[maxarr[i]].name);
+			printf("HP: %d\n", list[maxarr[i]].hp);
+			printf("MP: %d\n", list[maxarr[i]].mp);
+			printf("SPEED: %d\n", list[maxarr[i]].speed);
+			printf("RANGE: %d\n", list[maxarr[i]].range);
+			printf("POSITION: %s\n", list[maxarr[i]].position);
+			printf("\n");
 		}
+		return;
 	}
-	int maxarr[MAXDICT];
-	int count = 0;
-	for (int i = 0; i < size; i++)
+	if (list[index].hp >= maxHP)
 	{
-		if (list[i].hp == maxHP)
-		{
-			maxarr[count] = i;
-			count++;
-		}
+		maxHP = list[index].hp;
+		count = 0; // 최대 체력을 가진 챔피언들의 개수 초기화
+		maxarr[count] = index; // 현재 챔피언의 인덱스 저장
+		++count;
 	}
-	for (int i = 0; i < count; i++)
-	{
-		printf("%s의 정보\n", list[maxarr[i]].name);
-		printf("HP: %d\n", list[maxarr[i]].hp);
-		printf("MP: %d\n", list[maxarr[i]].mp);
-		printf("SPEED: %d\n", list[maxarr[i]].speed);
-		printf("RANGE: %d\n", list[maxarr[i]].range);
-		printf("POSITION: %s\n", list[i].position);
-		printf("\n");
-	}
+	FindMaxHP_R(index + 1, list, size);
 }
-void SortByHP(Dict list[], int size)
+void SortByHP_R(int index, Dict list[], int size)
 {
+	if (index >= size - 1) 
+	{
+		printf("체력순으로 정렬\n");
+		PrintAll_R(0, list, size);
+		return;
+	}
 	//버블정렬
-	Dict temp;
-	for (int i = 0; i < size - 1; i++)
+	if (list[index].hp < list[index + 1].hp) 
 	{
-		for (int j = 0; j < size - i - 1; j++)
-		{
-			if (list[j].hp < list[j + 1].hp)
-			{
-				temp = list[j];
-				list[j] = list[j + 1];
-				list[j + 1] = temp;
-			}
-		}
+		Dict temp = list[index];
+		list[index] = list[index + 1];
+		list[index + 1] = temp;
 	}
-	printf("체력순으로 정렬\n");
-	PrintAll(list, size);
+	SortByHP_R(index + 1, list, size);
 }
