@@ -94,7 +94,7 @@ int main()
 
 void Search_R(int index, Dict list[], int size, char searchname[])
 {
-	if (index > size)
+	if (index >= size)
 	{
 		printf("입력한 이름의 챔피언이 없습니다.\n");
 		return;
@@ -116,7 +116,7 @@ void Insert_R(int index, Dict list[], int size)
 {
 	if (index == size)
 	{
-		printf("새로운 챔피언의 정보 입력:\n");
+		printf("추가할 챔피언의 정보:\n");
 		printf("이름: ");
 		scanf("%s", list[size].name);
 		printf("HP: ");
@@ -129,7 +129,9 @@ void Insert_R(int index, Dict list[], int size)
 		scanf("%d", &list[size].range);
 		printf("POSITION: ");
 		scanf("%s", list[size].position);
+		size++;
 	}
+	else Insert_R(index + 1, list, size);
 }
 void Delete_R(int index, Dict list[], int size, char deletename[])
 {
@@ -174,8 +176,8 @@ void PrintAll_R(int index, Dict list[], int size)
 }
 void FindMaxHP_R(int index, Dict list[], int size)
 {
-	static int maxHP = 0; 
-	static int maxarr[MAXDICT]; 
+	static int maxHP = 0;
+	static int maxarr[MAXDICT];
 	static int count = 0;
 	if (index >= size)
 	{
@@ -192,25 +194,29 @@ void FindMaxHP_R(int index, Dict list[], int size)
 		}
 		return;
 	}
-	if (list[index].hp >= maxHP)
+	if (list[index].hp > maxHP)
 	{
 		maxHP = list[index].hp;
 		count = 0; // 최대 체력을 가진 챔피언들의 개수 초기화
 		maxarr[count] = index; // 현재 챔피언의 인덱스 저장
 		++count;
 	}
+	else if (list[index].hp == maxHP)
+	{
+		count++;	
+	}
 	FindMaxHP_R(index + 1, list, size);
 }
 void SortByHP_R(int index, Dict list[], int size)
 {
-	if (index >= size - 1) 
+	if (index >= size - 1)
 	{
 		printf("체력순으로 정렬\n");
 		PrintAll_R(0, list, size);
 		return;
 	}
 	//버블정렬
-	if (list[index].hp < list[index + 1].hp) 
+	if (list[index].hp < list[index + 1].hp)
 	{
 		Dict temp = list[index];
 		list[index] = list[index + 1];
