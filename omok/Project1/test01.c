@@ -103,12 +103,12 @@ void count_rowcolumn()
 void max_count_continuous()
 {
 	//가로
-	for (int i = 0; i < 19; ++i)
+	for (int i = 0; i < 19; i++)
 	{
 		int max_continuous = 0;
 		char max_type = '+';
-		int max_start_garo = 0;
-		int max_end_garo = 0;
+		int max_start_garo = -1;
+		int max_end_garo = -1;
 
 		int b_cont = 0;
 		int w_cont = 0;
@@ -166,65 +166,65 @@ void max_count_continuous()
 		}
 	}
 	//세로
-	for (int j= 0; j < 19; ++j)
+	for (int j= 0; j < 19; j++)
 	{
-		int max_continuous = 0;
-		char max_type = '+';
-		int max_start_sero= 0;
-		int max_end_sero = 0;
+		int max_continuous_sero = 0;
+		char max_type_sero = '+';
+		int max_start_sero= -1;
+		int max_end_sero = -1;
 
-		int b_cont = 0;
-		int w_cont = 0;
-		char prev_type = '+';
-		for (int i = 0; i < 19; ++i)
+		int b_cont_sero = 0;
+		int w_cont_sero = 0;
+		char prev_type_sero = '+';
+		for (int i = 0; i < 19; i++)
 		{
 			if ((board[i][j] == 'B' || board[i][j] == 'W') && board[i][j] != '+')
 			{
 				if (board[i][j] == 'B')
 				{
-					++b_cont;
+					++b_cont_sero;
 				}
 				else
-					++w_cont;
+					++w_cont_sero;
 			}
 			else
 			{
-				if (b_cont > max_continuous)
+				if (b_cont_sero > max_continuous_sero)
 				{
-					max_continuous = b_cont;
-					max_type = 'B';
-					max_start_sero = i - max_continuous;
-					max_end_sero = i - 1;
+					max_continuous_sero = b_cont_sero;
+					max_type_sero = 'B';
+					max_start_sero = j - max_continuous_sero+1;
+					max_end_sero = j ;
 				}
-				else if (w_cont > max_continuous)
+				else if (w_cont_sero > max_continuous_sero)
 				{
-					max_continuous = w_cont;
-					max_type = 'W';
-					max_start_sero = i - max_continuous;
-					max_end_sero = i - 1;
+					max_continuous_sero = w_cont_sero;
+					max_type_sero = 'W';
+					max_start_sero = j - max_continuous_sero+1;
+					max_end_sero = j ;
 				}
-				b_cont = (board[i][j] == 'B') ? 1 : 0;
-				w_cont = (board[i][j] == 'W') ? 1 : 0;
-				prev_type = board[i][j];
+				b_cont_sero = (board[i][j] == 'B') ? 1 : 0;
+				w_cont_sero = (board[i][j] == 'W') ? 1 : 0;
+				prev_type_sero = board[i][j];
 			}
 		}
-		if (b_cont > max_continuous)
+		if (b_cont_sero > max_continuous_sero)
 		{
-			max_continuous = b_cont;
-			max_type = 'B';
-			max_start_sero = BOARD_SIZE - max_continuous;
+			max_continuous_sero = b_cont_sero;
+			max_type_sero = 'B';
+			max_start_sero = BOARD_SIZE - max_continuous_sero;
 			max_end_sero = BOARD_SIZE - 1;
 		}
-		else if (w_cont > max_continuous)
+		else if (w_cont_sero > max_continuous_sero)
 		{
-			max_continuous = w_cont;
-			max_type = 'W';
-			max_start_sero = BOARD_SIZE - max_continuous;
+			max_continuous_sero = w_cont_sero;
+			max_type_sero = 'W';
+			max_start_sero = BOARD_SIZE - max_continuous_sero;
 			max_end_sero = BOARD_SIZE - 1;
 		}
-		if (max_type != '+')
+		if (max_type_sero != '+')
 		{
-			printf("가로%d줄에서 가장 많이 연속된 돌의 종류: %c 돌의 개수: %d\n", j, max_type, max_continuous);
+			printf("세로%d줄에서 가장 많이 연속된 돌의 종류: %c 돌의 개수: %d\n", j, max_type_sero, max_continuous_sero);
 			printf("시작 좌표: (%d,%d), 끝 좌표: (%d,%d)\n", j, max_start_sero, j, max_end_sero);
 		}
 	}
