@@ -53,7 +53,7 @@ int main()
 	int size = 22;
 	int order;
 	Node* head = array2list(list, size);
-	while (1)
+	while (1)	
 	{
 		printf("시작할 프로그램을 입력\n1.Search 2.Insert 3.Delete 4.DeleteAll 5.PrintAll 6.FindMaxHP 7.SortByHP\n");
 		scanf("%d", &order);
@@ -99,7 +99,6 @@ int main()
 		}
 	}
 }
-
 Node* array2list(Dict list[], int size)
 {
 	if (size <= 0) return NULL;
@@ -114,7 +113,7 @@ Node* array2list(Dict list[], int size)
 		if (head == NULL) //연결리스트가 빈 경우
 		{
 			head = newNode;
-			head->next = head; // 헤드 노드의 다음 노드를 자기 자신으로 설정하여 환형 연결 리스트 만듦
+			newNode->next = newNode; // 헤드 노드의 다음 노드를 자기 자신으로 설정하여 환형 연결 리스트 만듦
 		}
 		else
 		{
@@ -158,7 +157,6 @@ void Search_SL(Node *head, char searchname[])
 }
 void Insert_SL(Node* head)
 {
-
 	Dict data;
 	printf("추가할 챔피언의 이름 입력: ");
 	scanf("%s", data.name);
@@ -208,7 +206,7 @@ void Delete_SL(Node* head, char deletename[])
 		{
 			// 삭제할 노드를 찾으면 해당 노드를 삭제
 			if (prev != NULL) 
-			{
+			{	
 				prev->next = current->next;
 			}
 			else 
@@ -240,11 +238,11 @@ void DeleteAll_SL(Node* head, char deleteposition[]) {
 	do {
 		if (strcmp(current->data.position, deleteposition) == 0) 
 		{
-			if (prev != NULL) 
+			if (prev != NULL)   //첫노드가 아니라면
 			{
-				prev->next = current->next;
+				prev->next = current->next;  //1번 3번 연결
 			}
-			else 
+			else   //첫노드라면
 			{
 				if (current->next == current) // 리스트에 하나의 노드만 있는 경우
 				{ 
@@ -312,7 +310,7 @@ void FindMaxHP_SL(Node *head)
 
 	int count = 0;
 	Dict maxarr[MAXDICT];
-	int maxHP = current->data.hp;
+	int maxHP = 0;
 
 	while (current != NULL)
 	{
