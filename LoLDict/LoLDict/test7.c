@@ -7,47 +7,22 @@
 typedef struct {
 	char name[30];
 	int hp, mp, speed, range;
-	char position[10];
+	char position[30];
 }Dict;
 
-typedef struct {
+typedef struct Node{
 	Dict data;
 	struct Node* next;
 }Node;
 
-Node* array2circularlist(Dict list[], int size) 
-{
-	if (size <= 0) return NULL;
-
-	Node* head = NULL;
-	Node* newNode = NULL;
-	for (int i = 0; i < size; i++) 
-	{
-		newNode = (Node*)malloc(sizeof(Node));
-		newNode->data = list[i];
-		newNode->next = NULL; 
-		if (head == NULL) //연결리스트가 빈 경우
-		{
-			head = newNode;
-			head->next = head; // 헤드 노드의 다음 노드를 자기 자신으로 설정하여 환형 연결 리스트 만듦
-		}
-		else
-		{
-			newNode->next = head->next; // 새로운 노드의 다음 노드를 head의 다음 노드로 설정
-			head->next = newNode; // head의 다음 노드를 새로운 노드로 설정
-			head = newNode; // head를 새로운 노드로 업데이트
-		}
-	}
-
-	return head;
-}
-void Search_R(int index, Dict list[], int size, char searchname[]);
-void Insert_R(int index, Dict list[], int size);
-void Delete_R(int index, Dict list[], int size, char deletename[]);
-void DeleteAll_R(int index, Dict list[], int size, char deleteposition[]);
-void PrintAll_R(int index, Dict list[], int size);
-void FindMaxHP_R(int index, Dict list[], int size);
-void SortByHP_R(int index, Dict list[], int size);
+Node* array2list(Dict list[], int size);
+void Search_SL(Node *head, char searchname[]);
+void Insert_SL(Node *head);
+void Delete_SL(Node* head, char deletename[]);
+void DeleteAll_SL(Node* head, char deleteposition[]);
+void PrintAll_SL(Node *head);
+void FindMaxHP_SL(Node *head);
+void SortByHP_SL(Node*head);
 
 int main()
 {
@@ -77,6 +52,7 @@ int main()
 	};
 	int size = 22;
 	int order;
+	Node* head = array2list(list, size);
 	while (1)
 	{
 		printf("시작할 프로그램을 입력\n1.Search 2.Insert 3.Delete 4.DeleteAll 5.PrintAll 6.FindMaxHP 7.SortByHP\n");
@@ -87,18 +63,18 @@ int main()
 			char searchname[30];
 			printf("찾을 챔피언의 이름 입력: \n");
 			scanf("%s", searchname);
-			Search_R(0, list, size, searchname);
+			Search_SL(head, searchname);
 		}
 		else if (order == 2)
 		{
-			Insert_R(0, list, size);
+			Insert_SL(head);
 		}
 		else if (order == 3)
 		{
 			char deletename[30];
 			printf("삭제할 챔피언의 이름 입력: \n");
 			scanf("%s", deletename);
-			Delete_R(0, list, size, deletename);
+			Delete_SL(head, deletename);
 
 		}
 		else if (order == 4)
@@ -106,153 +82,293 @@ int main()
 			char deleteposition[30];
 			printf("삭제할 포지션의 이름 입력: \n");
 			scanf("%s", deleteposition);
-			DeleteAll_R(0, list, size, deleteposition);
+			DeleteAll_SL(head, deleteposition);
 
 		}
 		else if (order == 5)
 		{
-			PrintAll_R(0, list, size);
+			PrintAll_SL(head);
 		}
 		else if (order == 6)
 		{
-			FindMaxHP_R(0, list, size);
+			FindMaxHP_SL(head);
 		}
 		else if (order == 7)
 		{
-			SortByHP_R(0, list, size);
+			SortByHP_SL(head);
 		}
 	}
 }
 
-void Search_R(int index, Dict list[], int size, char searchname[])
+Node* array2list(Dict list[], int size)
 {
-	if (index >= size)
+	if (size <= 0) return NULL;
+
+	Node* head = NULL;
+	Node* newNode = NULL;
+	for (int i = 0; i < size; i++)
 	{
-		printf("입력한 이름의 챔피언이 없습니다.\n");
-		return;
+		newNode = (Node*)malloc(sizeof(Node));
+		newNode->data = list[i];
+		newNode->next = NULL;
+		if (head == NULL) //연결리스트가 빈 경우
+		{
+			head = newNode;
+			head->next = head; // 헤드 노드의 다음 노드를 자기 자신으로 설정하여 환형 연결 리스트 만듦
+		}
+		else
+		{
+			newNode->next = head->next; // 새로운 노드의 다음 노드를 head의 다음 노드로 설정
+			head->next = newNode; // head의 다음 노드를 새로운 노드로 설정
+			head = newNode; // head를 새로운 노드로 업데이트
+		}
 	}
-	if (strcmp(list[index].name, searchname) == 0)
+
+	return head;
+}
+void Search_SL(Node *head, char searchname[])
+{
+	if (head == NULL || head->next == head)
 	{
-		printf("%s의 정보\n", list[index].name);
-		printf("HP: %d\n", list[index].hp);
-		printf("MP: %d\n", list[index].mp);
-		printf("SPEED: %d\n", list[index].speed);
-		printf("RANGE: %d\n", list[index].range);
-		printf("POSITION: %s\n", list[index].position);
+		printf("리스트가 비어 있습니다.\n");
 		return;
 	}
 
-	else Search_R(index + 1, list, size, searchname);
-}
-void Insert_R(int index, Dict list[], int size)
-{
-	if (index == size)
+	Node* current = head;
+
+	while (1)
 	{
-		printf("추가할 챔피언의 정보:\n");
-		printf("이름: ");
-		scanf("%s", list[size].name);
-		printf("HP: ");
-		scanf("%d", &list[size].hp);
-		printf("MP: ");
-		scanf("%d", &list[size].mp);
-		printf("SPEED: ");
-		scanf("%d", &list[size].speed);
-		printf("RANGE: ");
-		scanf("%d", &list[size].range);
-		printf("POSITION: ");
-		scanf("%s", list[size].position);
-		size++;
+		if (strcmp(current->data.name, searchname) == 0)
+		{
+			printf("%s의 정보\n", current->data.name);
+			printf("HP: %d\n", current->data.hp);
+			printf("MP: %d\n", current->data.mp);
+			printf("SPEED: %d\n", current->data.speed);
+			printf("RANGE: %d\n", current->data.range);
+			printf("POSITION: %s\n", current->data.position);
+			return;
+		}
+
+		current = current->next;
+
+		if (current == head)
+			break;
 	}
-	else Insert_R(index + 1, list, size);
+	printf("입력한 이름의 챔피언이 없습니다.\n");
 }
-void Delete_R(int index, Dict list[], int size, char deletename[])
+void Insert_SL(Node* head)
 {
-	if (index >= size) return;
-	if (strcmp(list[index].name, deletename) == 0)
+
+	Dict data;
+	printf("추가할 챔피언의 이름 입력: ");
+	scanf("%s", data.name);
+	printf("HP 입력: ");
+	scanf("%d", &data.hp);
+	printf("MP 입력: ");
+	scanf("%d", &data.mp);
+	printf("SPEED 입력: ");
+	scanf("%d", &data.speed);
+	printf("RANGE 입력: ");
+	scanf("%d", &data.range);
+	printf("POSITION 입력: ");
+	scanf("%s", data.position);
+
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	newNode->data = data;
+
+	if (head == NULL)
 	{
-		//그냥 삭제한다는 플래그를 만듬. 이 자리의 값에 대해 직접적으로 묻지 않도록 작성 예정.
-		printf("%s 챔피언이 삭제되었습니다.\n", deletename);
-		list[index].name[0] = '\0';
-		Delete_R(index + 1, list, size, deletename);
+		newNode->next = newNode; // 노드가 하나만 있는 경우, 자기 자신을 가리킴
+		head = newNode; // 헤드를 새로운 노드로 설정
+	}
+	else
+	{
+		Node* current = head;
+		while (current->next != head && current->next->data.hp > data.hp)
+		{
+			current = current->next;
+		}
+		newNode->next = current->next; // 새 노드의 다음 노드를 현재 노드의 다음 노드로 설정
+		current->next = newNode; // 현재 노드의 다음 노드를 새 노드로 설정
+	}
+
+	printf("챔피언이 성공적으로 추가되었습니다.\n");
+}
+void Delete_SL(Node* head, char deletename[])
+{
+	if (head == NULL) 
+	{
+		printf("리스트가 비어 있습니다.\n");
 		return;
 	}
-	Delete_R(index + 1, list, size, deletename);
+	Node* current = head;
+	Node* prev = NULL;
+	do {
+		if (strcmp(current->data.name, deletename) == 0) 
+		{
+			// 삭제할 노드를 찾으면 해당 노드를 삭제
+			if (prev != NULL) 
+			{
+				prev->next = current->next;
+			}
+			else 
+			{
+				// 삭제할 노드가 첫 번째 노드일 경우
+				head = current->next;
+			}
+			printf("%s 챔피언이 삭제되었습니다.\n", deletename);
+			free(current); // 메모리 해제
+			return;
+		}
+		prev = current;
+		current = current->next;
+	} while (current != head); // 리스트를 한 바퀴 돌아서 첫 번째 노드로 돌아올 때까지 반복
+
+	printf("%s 챔피언을 찾을 수 없습니다.\n", deletename);
 }
-void DeleteAll_R(int index, Dict list[], int size, char deleteposition[])
-{
-	if (index >= size)
-		return printf("%s 포지션이 삭제되었습니다.\n", deleteposition);
-	if (strcmp(list[index].position, deleteposition) == 0)
+void DeleteAll_SL(Node* head, char deleteposition[]) {
+	if (head == NULL) 
 	{
-		//그냥 삭제한다는 플래그를 만듬. 이 자리의 값에 대해 직접적으로 묻지 않도록 작성 예정.
-		list[index].name[0] = '\0';
-		DeleteAll_R(index + 1, list, size, deleteposition);
+		printf("리스트가 비어 있습니다.\n");
 		return;
 	}
-	DeleteAll_R(index + 1, list, size, deleteposition);
+
+	Node* current = head;
+	Node* prev = NULL;
+	int deletedCount = 0;
+
+	do {
+		if (strcmp(current->data.position, deleteposition) == 0) 
+		{
+			if (prev != NULL) 
+			{
+				prev->next = current->next;
+			}
+			else 
+			{
+				if (current->next == current) // 리스트에 하나의 노드만 있는 경우
+				{ 
+					head = NULL;
+					free(current);
+					printf("%s 포지션이 삭제되었습니다.\n", deleteposition);
+					return;
+				}
+				else 
+				{
+					head = current->next;
+				}
+			}
+			Node* temp = current;
+			current = current->next;
+			free(temp);
+			deletedCount++;
+		}
+		else {
+			prev = current;
+			current = current->next;
+		}
+	} while (current != head);
+
+	if (deletedCount > 0) {
+		printf("%s 포지션이 %d개 삭제되었습니다.\n", deleteposition, deletedCount);
+	}
+	else {
+		printf("%s 포지션을 찾을 수 없습니다.\n", deleteposition);
+	}
 }
-void PrintAll_R(int index, Dict list[], int size)
+void PrintAll_SL(Node *head)
 {
-	if (index >= size) return;
-	if (list[index].name[0] != '\0')
+	if (head == NULL)
 	{
-		printf("%s의 정보\n", list[index].name);
-		printf("HP: %d\n", list[index].hp);
-		printf("MP: %d\n", list[index].mp);
-		printf("SPEED: %d\n", list[index].speed);
-		printf("RANGE: %d\n", list[index].range);
-		printf("POSITION: %s\n", list[index].position);
+		printf("리스트가 비었습니다.\n");
+		return;
+	}
+	Node* current = head;
+	while (1)
+	{
+		printf("%s의 정보\n", current->data.name);
+		printf("HP: %d\n", current->data.hp);
+		printf("MP: %d\n", current->data.mp);
+		printf("SPEED: %d\n", current->data.speed);
+		printf("RANGE: %d\n", current->data.range);
+		printf("POSITION: %s\n", current->data.position);
+		printf("\n");
+
+		current = current->next;
+
+		if (current == head) // 처음 노드에 도달하면 종료
+			break;
+	}
+}
+void FindMaxHP_SL(Node *head)
+{
+	if (head == NULL || head->next == head)
+	{
+		printf("리스트가 비었거나 하나를 가지고 있습니다.\n");
+		return;
+	}
+
+	Node* current = head;
+
+	int count = 0;
+	Dict maxarr[MAXDICT];
+	int maxHP = current->data.hp;
+
+	while (current != NULL)
+	{
+		if (current->data.hp > maxHP)
+		{
+			maxHP = current->data.hp;
+			count = 0;
+			maxarr[count] = current->data; // 현재 챔피언의 정보를 저장
+			count++;
+		}
+		else if (current->data.hp == maxHP)
+		{
+			maxarr[count] = current->data;// 현재 챔피언의 정보를 저장
+			count++;
+		}
+
+		current = current->next;
+		if (current == head) // 처음 노드로 돌아왔을 때 루프 종료
+			break;
+	}
+
+	for (int i = 0; i < count; i++)
+	{
+		printf("%s의 정보\n", maxarr[i].name);
+		printf("HP: %d\n", maxarr[i].hp);
+		printf("MP: %d\n", maxarr[i].mp);
+		printf("SPEED: %d\n", maxarr[i].speed);
+		printf("RANGE: %d\n", maxarr[i].range);
+		printf("POSITION: %s\n", maxarr[i].position);
 		printf("\n");
 	}
-	PrintAll_R(index + 1, list, size);
 }
-void FindMaxHP_R(int index, Dict list[], int size)
+void SortByHP_SL(Node *head)
 {
-	static int maxHP = 0;
-	static int maxarr[MAXDICT];
-	static int count = 0;
-	if (index >= size)
+	if (head == NULL || head->next == head)
 	{
-		// 최대 체력을 가진 챔피언들의 정보 출력
-		for (int i = 0; i < count; i++)
+		printf("리스트가 비었거나 하나를 가지고 있습니다.\n");
+		return;
+	}
+	int swapped = 1;
+	while (swapped)
+	{
+		swapped = 0;
+		Node* ptr = head;
+		while (ptr->next != head)
 		{
-			printf("%s의 정보\n", list[maxarr[i]].name);
-			printf("HP: %d\n", list[maxarr[i]].hp);
-			printf("MP: %d\n", list[maxarr[i]].mp);
-			printf("SPEED: %d\n", list[maxarr[i]].speed);
-			printf("RANGE: %d\n", list[maxarr[i]].range);
-			printf("POSITION: %s\n", list[maxarr[i]].position);
-			printf("\n");
+			if (ptr->data.hp < ptr->next->data.hp)
+			{
+				Dict temp = ptr->data;
+				ptr->data = ptr->next->data;
+				ptr->next->data = temp;
+				swapped = 1;
+			}
+			ptr = ptr->next;
 		}
-		return;
 	}
-	if (list[index].hp > maxHP)
-	{
-		maxHP = list[index].hp;
-		count = 0; // 최대 체력을 가진 챔피언들의 개수 초기화
-		maxarr[count] = index; // 현재 챔피언의 인덱스 저장
-		++count;
-	}
-	else if (list[index].hp == maxHP)
-	{
-		count++;
-	}
-	FindMaxHP_R(index + 1, list, size);
-}
-void SortByHP_R(int index, Dict list[], int size)
-{
-	if (index >= size - 1)
-	{
-		printf("체력순으로 정렬\n");
-		PrintAll_R(0, list, size);
-		return;
-	}
-	//버블정렬
-	if (list[index].hp < list[index + 1].hp)
-	{
-		Dict temp = list[index];
-		list[index] = list[index + 1];
-		list[index + 1] = temp;
-	}
-	SortByHP_R(index + 1, list, size);
+	printf("체력순으로 정렬\n");
+	PrintAll_SL(head);
 }

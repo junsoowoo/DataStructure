@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test7.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|solutionrelative:LoLDict\\test7.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test5.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1DB47AB2-089C-4C66-B6CA-255F3C2FBE53}|LoLDict\\LoLDict.vcxproj|solutionrelative:LoLDict\\test5.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +14,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -28,27 +28,10 @@
               "RelativeDocumentMoniker": "LoLDict\\test7.c",
               "ToolTip": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test7.c",
               "RelativeToolTip": "LoLDict\\test7.c",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAABsAAAAYAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-04-29T13:54:25.218Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "test5.c",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test5.c",
-              "RelativeDocumentMoniker": "LoLDict\\test5.c",
-              "ToolTip": "C:\\Users\\user\\Desktop\\\uD559\uAD50\\3-1\\\uC790\uB8CC\uAD6C\uC870\\DataStructure\\LoLDict\\LoLDict\\test5.c",
-              "RelativeToolTip": "LoLDict\\test5.c",
-              "ViewState": "AQIAALgAAAAAAAAAAAAcwOIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-04-05T06:35:32.898Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }
