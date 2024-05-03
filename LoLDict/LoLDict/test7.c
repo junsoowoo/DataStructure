@@ -112,8 +112,8 @@ Node* array2list(Dict list[], int size)
 		newNode->next = NULL;
 		if (head == NULL) //연결리스트가 빈 경우
 		{
-			head = newNode;
 			newNode->next = newNode; // 헤드 노드의 다음 노드를 자기 자신으로 설정하여 환형 연결 리스트 만듦
+			head = newNode;
 		}
 		else
 		{
@@ -189,7 +189,6 @@ void Insert_SL(Node* head)
 		newNode->next = current->next; // 새 노드의 다음 노드를 현재 노드의 다음 노드로 설정
 		current->next = newNode; // 현재 노드의 다음 노드를 새 노드로 설정
 	}
-
 	printf("챔피언이 성공적으로 추가되었습니다.\n");
 }
 void Delete_SL(Node* head, char deletename[])
@@ -312,7 +311,7 @@ void FindMaxHP_SL(Node *head)
 	Dict maxarr[MAXDICT];
 	int maxHP = 0;
 
-	while (current != NULL)
+	while (1)
 	{
 		if (current->data.hp > maxHP)
 		{
@@ -326,7 +325,6 @@ void FindMaxHP_SL(Node *head)
 			maxarr[count] = current->data;// 현재 챔피언의 정보를 저장
 			count++;
 		}
-
 		current = current->next;
 		if (current == head) // 처음 노드로 돌아왔을 때 루프 종료
 			break;
