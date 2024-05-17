@@ -21,7 +21,7 @@ typedef struct {
 } Stone;
 
 //초기값 설정
-#define BOARD_SIZE 19;
+#define BOARD_SIZE 19
 #define STACK_SIZE 100
 char board[19][19];
 int b_cnt = 0;
@@ -34,9 +34,9 @@ int top_redo = -1; // redo 스택의 top을 나타내는 변수
 int main()
 {
 	//초기 보드판 그리기
-	for (int i = 0; i < 19; i++)
+	for (int i = 0; i < BOARD_SIZE; i++)
 	{
-		for (int j = 0; j < 19; j++)
+		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			board[i][j] = '+';
 			printf("%c ", board[i][j]);
@@ -70,6 +70,7 @@ int main()
 	}
 	return 0;
 }
+
 void draw_board()
 {
 	for (int i = 0; i < 19; i++)
@@ -84,10 +85,16 @@ void draw_board()
 void put_black()
 {
 	int x, y;
-	char order='a';
-	printf("저장을 원하면 S, 검은돌 진행을 원하면 B, 무르기를 원하면 U, 다시 놓기를 원하면 R, 돌 변경 C\n");
-	scanf(" %c", &order);
-	if (order == 'B' || order == 'b')
+	int order;
+	printf("저장을 원하면 0, 검은돌 진행을 원하면 1, 무르기를 원하면 2, 다시 놓기를 원하면 3, 돌 변경 4\n");
+	scanf("%d", &order);
+	if (order == 0)
+	{
+		save_game();
+		printf("저장되었습니다.\n");
+		exit(0);
+	}
+	else if (order == 1)
 	{
 		printf("검은돌이 놓일 좌표를 입력하세요.(0~18).\n");
 		scanf("%d%d", &x, &y);
@@ -101,13 +108,7 @@ void put_black()
 		draw_board();
 		push(x, y, 'B');
 	}
-	else if (order == 'S' || order == 's')
-	{
-		save_game();
-		printf("저장되었습니다.\n");
-		exit(0);
-	}
-	else if (order == 'U' || order == 'u')
+	else if (order == 2)
 	{
 		if (top_undo == -1)
 		{
@@ -117,7 +118,7 @@ void put_black()
 		pop();
 		draw_board();
 	}
-	else if (order == 'R' || order == 'r')
+	else if (order == 3)
 	{
 		if (top_redo == -1)
 		{
@@ -126,11 +127,10 @@ void put_black()
 		}
 		redo(); // redo 스택에서 돌 좌표를 pop하여 돌을 다시 놓음
 	}
-	else if (order == 'C' || order == 'c')
+	else if (order == 4)
 	{
 		printf("이제 흰 돌입니다.\n");
 		put_white();
-		
 	}
 	else
 	{
@@ -142,10 +142,10 @@ void put_black()
 void put_white()
 {
 	int x, y;
-	char order = 'a';
-	printf("저장을 원하면 S, 흰돌 진행을 원하면 W, 무르기를 원하면 U, 다시 놓기를 원하면 R, 돌 변경 C\n");
-	scanf(" %c", &order);
-	if (order == 'W' || order == 'w')
+	int order;
+	printf("저장을 원하면 0, 흰돌 진행을 원하면 1, 무르기를 원하면 2, 다시 놓기를 원하면 3, 돌 변경 4\n");
+	scanf("%d", &order);
+	if (order == 1)
 	{
 		printf("흰 돌이 놓일 좌표를 입력하세요.(0~18).\n");
 		scanf("%d%d", &x, &y);
@@ -159,13 +159,13 @@ void put_white()
 		draw_board();
 		push(x, y, 'W');
 	}
-	else if (order == 'S' || order == 's')
+	else if (order == 0)
 	{
 		save_game();
 		printf("저장되었습니다.\n");
 		exit(0);
 	}
-	else if (order == 'U' || order == 'u')
+	else if (order == 2)
 	{
 		if (top_undo == -1)
 		{
@@ -176,7 +176,7 @@ void put_white()
 		printf("\n");
 		draw_board();
 	}
-	else if (order == 'R' || order == 'r')
+	else if (order == 3)
 	{
 		if (top_redo == -1)
 		{
@@ -185,7 +185,7 @@ void put_white()
 		}
 		redo(); // redo 스택에서 돌 좌표를 pop하여 돌을 다시 놓음
 	}
-	else if (order == 'C' || order == 'c')
+	else if (order == 4)
 	{
 		printf("이제 검은 돌입니다.\n");
 		put_black();
@@ -264,26 +264,24 @@ void pop()
 	int y = undoStack[top_undo].y;
 	char stone_type = undoStack[top_undo].stone_type;
 
-	// 스택에서 제거하고 top_undo를 감소시킴
-	top_undo--;
-
-	// 보드에서 돌을 제거하고 다시 그림
-	board[x][y] = '+';
-	draw_board();
-
-	// 돌의 타입을 redo 스택에 저장
 	if (top_redo < STACK_SIZE - 1)
 	{
+		// 스택에서 제거하고 top_undo를 감소시킴
+		top_undo--;
+
+		// 보드에서 돌을 제거하고 다시 그림
+		board[x][y] = '+';
 		top_redo++;
 		redoStack[top_redo].x = x;
 		redoStack[top_redo].y = y;
 		redoStack[top_redo].stone_type = stone_type;
+		draw_board();
 	}
 	else
 	{
 		printf("redo 스택이 가득 찼습니다.\n");
+		return;
 	}
-	draw_board();
 }
 void redo()
 {
