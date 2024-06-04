@@ -21,6 +21,12 @@
     <ClCompile Include="test5.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="test10.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="test11.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="test7.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
